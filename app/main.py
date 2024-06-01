@@ -1,10 +1,20 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+import uvicorn
 from fastapi.responses import FileResponse
+from contextlib import asynccontextmanager
 import time
+
+
+
+from routers import user as UserRouter
+
+
 
 
 # Экземпляр FactAPI.
 app = FastAPI()
+# Маршрутизация пользователя.
+app.include_router(UserRouter.router, prefix='/user')
 
 
 
@@ -39,3 +49,6 @@ async def page_event(event_id: int):
     Страница отправки события игроку.
     """
     return {'message': f'Создано событие {event_id}'}
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', host='0.0.0.0', port='8080')
