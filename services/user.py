@@ -35,7 +35,6 @@ def remove(db: Session, id: int):
     user = db.query(User).filter(User.id==id).delete()
 
     db.commit()
-    db.refresh(user)
 
     return user
     
