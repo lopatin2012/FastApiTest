@@ -4,11 +4,12 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 import time
 
+from database.base import Base, engine
 
 
 from routers import user as UserRouter
 
-
+Base.metadata.create_all(bind=engine)
 
 
 # Экземпляр FactAPI.
