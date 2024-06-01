@@ -7,13 +7,13 @@ from dto import user as UserDTO
 
 router = APIRouter()
 
-@router.post('/', tags=['user'])
-async def create(db: Session = Depends(get_db), data: UserDTO.User = None):
-    return UserService.create(db=db, data=data)
-
 @router.get('/{id}', tags=['user'])
 async def get(id: int = None, db: Session = Depends(get_db)):
     return UserService.get(id=id, db=db)
+
+@router.post('/', tags=['user'])
+async def create(db: Session = Depends(get_db), data: UserDTO.User = None):
+    return UserService.create(db=db, data=data)
 
 @router.put('/{id}', tags=['user'])
 async def update(id: int = None, db: Session = Depends(get_db), data: UserDTO.User = None):

@@ -8,7 +8,7 @@ def create(data: user.User, db: Session):
     try:
         db.add(user)
         db.commit()
-        db.refresh()
+        db.refresh(user)
     except Exception as e:
         print(f"Ошибка: {e}")
 
@@ -26,7 +26,7 @@ def update(data: user.User, db: Session, id: int):
 
     db.add(user)
     db.commit()
-    db.refresh()
+    db.refresh(user)
 
     return user
 
@@ -35,6 +35,7 @@ def remove(db: Session, id: int):
     user = db.query(User).filter(User.id==id).delete()
 
     db.commit()
+    db.refresh(user)
 
     return user
     
