@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request
 import uvicorn
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from contextlib import asynccontextmanager
 import time
 
@@ -16,18 +18,24 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 # Маршрутизация пользователя.
 app.include_router(UserRouter.router, prefix='/user')
+# Статические файлы.
+app.mount('/static', StaticFiles(directory='static'), name='static')
+# Директория с шаблонами.
+templates = Jinja2Templates(directory='templates')
 
 
-
-@app.get('/')
-async def page_main():
+@app.get('/', tags=['page'], response_class=HTMLResponse)
+async def page_main(request: Request):
     """
     Главная страница.
     """
-    return FileResponse('templates/base/index.html')
+    test = 1
+    return templates.TemplateResponse(
+        request=request, name='base/index.html', context={'test': test}
+    )
 
 
-@app.get('/about')
+@app.get('/about', tags=['page'])
 async def page_about():
     """
     Страница о проекте.
@@ -35,7 +43,7 @@ async def page_about():
     return {'message': 'Информационная страница'}
 
 
-@app.get('/stats')
+@app.get('/stats', tags=['page'])
 async def page_stats():
     """
     Страница статистики.
@@ -44,12 +52,13 @@ async def page_stats():
     return {'message': f'Проведено времени на трансляции {simply_time}! секунд'}
 
 
-@app.post('/send_event')
+@app.post('/send_event', tags=['page'])
 async def page_event(event_id: int):
     """
     Страница отправки события игроку.
     """
     return {'message': f'Создано событие {event_id}'}
+
 
 if __name__ == '__main__':
     uvicorn.run('main:app', host='0.0.0.0', port='8080')
