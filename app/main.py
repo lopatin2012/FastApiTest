@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from contextlib import asynccontextmanager
 import time
+import os
 
 from database.base import Base, engine
 
@@ -15,7 +16,7 @@ Base.metadata.create_all(bind=engine)
 
 
 # Экземпляр FactAPI.
-app = FastAPI()
+app = FastAPI(debug=True)
 # Маршрутизация пользователя.
 app.include_router(UserRouter.router, prefix='/user')
 # Статические файлы.
@@ -30,8 +31,11 @@ async def page_main(request: Request):
     Главная страница.
     """
     test = 1
+    context = {
+        'title': 'Название страницы',
+    }
     return templates.TemplateResponse(
-        request=request, name='base/index.html', context={'test': test}
+        request=request, name='main_menu/main.html', context=context
     )
 
 
