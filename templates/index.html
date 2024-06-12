@@ -2,14 +2,38 @@
 
 <html lang="ru">
     <head>
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
         {% block head %}
         {% endblock head %}
         <title>{{ title }}</title>
     </head>
     <body>
-        <header>Меню</header>
-        {% block content %}
-        {% endblock content %}
-        <footer>Все права защищены.</footer>
+        <header class="header">
+            <div class="header__main">
+                <div class="header__inner">
+                    <div class="header__wrapper">
+                        <div class="header__item header__logo">Картинка</div>
+                        <div class="header__item header__menu">Какое-то меню</div>
+                        <div class="header__item header__right-menu">Кнопки справа</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <div class="content__inner">
+                <div class="content__left-column"></div>
+                <div class="content__center-column">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+                <div class="content__right-column"></div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer__inner">
+                Все права защищены.
+            </div>
+        </footer>
     </body>
 </html>

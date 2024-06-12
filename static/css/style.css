@@ -1,3 +1,141 @@
-p {
-    background-color: aqua;
+/* Начало. Сброс стилей.  */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i,  dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;                               /* обнуляем отступы и убираем бордюры */
+	vertical-align: baseline;          /* приводим все к одной базовой линии */
+	background: transparent;      /* чтобы не проскакивали левые фоны, установленные по умолчанию */
+	font-size: 100%;                     /* размер шрифта всем одинаковый */
 }
+a {                                      	     /* ссылка не в общем списке чтобы не сбрасывать outline по умолчанию */
+	margin:0;
+	padding:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+	outline:none;
+}
+table {						/* устраняем отступы между ячейками таблицы */
+	border-collapse: collapse; 
+	border-spacing: 0;
+}
+td, td img {
+	vertical-align: top;			/* возвращаем привычное вертикальное выравнивание */
+} 
+input, select, button, textarea {
+	margin: 0; 				/* убираем отступы по умолчанию для элементов форм (в частности для checkbox и radio) */
+	font-size: 100%; 			/* делаем размер шрифтов везде одинаковым */
+	outline: none;
+}
+input[type="text"], input[type="password"], textarea {
+	padding: 0; 				/* убираем внутренние отступы для текстовых полей */
+}
+input[type="checkbox"] { 		/* вертикальное выравнивание чекбоксов и радиобатонов относительно меток */
+	vertical-align: bottom;
+}
+input[type="radio"] {
+	vertical-align: text-bottom;
+}
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display:block;
+}
+nav ul {
+	 list-style:none;
+}
+/* Конец. Сброс стилей. */
+
+
+/* Начало. Шапка. */
+.header__main {
+    position: relative;
+    box-shadow: 0px 5px 5px 3px rgba(0, 0, 0, 0.3);
+    margin: 0 20px;
+    border-radius: 0 0 5px 5px;
+}
+
+.header__inner {
+    margin: 0 240px;
+}
+
+.header__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100;
+}
+
+.header__logo {
+    width: 100;
+    position: relative;
+}
+
+.header__menu {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.header__right-menu {
+    flex-shrink: 0;
+}
+
+/* Конец. Шапка. */
+
+/* Начало. Контент. */
+
+.content {
+    margin: 0 240px;
+    display: flex;
+    min-height: 95vh;
+}
+
+.content__inner {
+    display: flex;
+    flex: 1;
+}
+
+.content__left-column, .content__center-column, .content__right-column {
+    padding: 0 20px;
+}
+
+.content__left-column, .content__right-column {
+    background-color: #f2f2f2;
+    flex: 0 0 200px;
+    margin: 3px;
+}
+
+.content__center-column {
+    background-color: #eaeaea;
+    flex: 1;
+    margin: 20px;
+}
+
+/* Конец. Контент. */
+
+/* Начало. Нижнее меню. */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer__inner {
+    position: relative;
+    height: 60px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    margin: 0 20px;
+    border-radius: 5px 5px 0 0;
+}
+/* Конец. Нижнее меню. */
